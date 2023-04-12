@@ -27,6 +27,8 @@ There are Three routes possible for this project:
 
 ---
 
+If you wish to work with an existing API for your project you must present a successful API call through your browser or Insomnia when you bring in your proposal on Monday 4/17
+
 ### Suggested Ways to Get Started
 
 - Think of a problem in the world, or even in your personal life, and apply what you've learned to build an application that can help solve the issue.
