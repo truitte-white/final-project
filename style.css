@@ -1,0 +1,99 @@
+body{
+    background-color:lightskyblue;
+    position: center;
+}
+
+#map { 
+    height: 500px; 
+    position: center;
+    border-radius: 20px;
+    padding-bottom: 20px;
+}
+
+#teamMap { 
+    height: 600px; 
+    position: center;
+    border-radius: 20px;
+    padding-bottom: 20px;
+}
+
+.allLogos {
+    width: 650px;
+    position: center;
+    padding: 15px;
+    padding-bottom: 20px;
+    background-size: contain;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.logoNFL {
+    width: 200px;
+    position: center;
+    padding: 20px;
+    background-size: contain;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+img{
+    background-size: contain;
+    padding: 10px;
+    width: 300px;
+}
+
+.input{
+    font-size: 16px;
+    padding: 7px 14px;
+}
+
+#allButton {
+    position: center;
+}
+
+.button {
+    border-radius: 4px;
+    background-color: #234888;
+    border-color: black;
+    color: white;
+    font-size: 16px;
+    padding: 7px 14px;
+    position: center;
+}
+
+
+
+.teamLogos {
+    width: 5px;
+    position: center;
+}
+
+.venueImages {
+    width: 10px;
+    position: center;
+}
+  
+#frame {
+    vertical-align: middle;
+    border: 1px solid black;
+    border-radius: 20px;
+    background-color:silver;
+    margin: auto;
+    text-align: center;
+    width: 60em;
+    justify-content: center;
+    margin-top: 30px;
+}
+    
+h1 {
+    text-align: center;
+    position: center;
+}
+  
+form {
+    text-align: center;
+    position: center;
+}
+
