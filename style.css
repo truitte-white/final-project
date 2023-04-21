@@ -1,5 +1,5 @@
 body{
-    background-color:lightskyblue;
+    background-color: rgba(80, 154, 233, 0.5);
     position: center;
 }
 
@@ -15,17 +15,6 @@ body{
     position: center;
     border-radius: 20px;
     padding-bottom: 20px;
-}
-
-.allLogos {
-    width: 650px;
-    position: center;
-    padding: 15px;
-    padding-bottom: 20px;
-    background-size: contain;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
 }
 
 .logoNFL {
@@ -49,10 +38,6 @@ img{
     padding: 7px 14px;
 }
 
-#allButton {
-    position: center;
-}
-
 .button {
     border-radius: 4px;
     background-color: #234888;
@@ -62,8 +47,6 @@ img{
     padding: 7px 14px;
     position: center;
 }
-
-
 
 .teamLogos {
     width: 5px;
@@ -84,7 +67,7 @@ img{
     text-align: center;
     width: 60em;
     justify-content: center;
-    margin-top: 30px;
+    margin-top: 10px;
 }
     
 h1 {
