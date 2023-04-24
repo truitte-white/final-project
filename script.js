@@ -1,6 +1,6 @@
 //technical challenge number 1, searching by team name returns very limited information(but is the best search to use due to the variations of names that it returns)
 // to return more advanced stats the team id needs to be mapped to the teamname to return the data. I got around this by returning the team ID from the original search,
-//sticking the ID in a variable and then inserting the variable into the URL where the ID goes. I know if can be done with a function, will fix if I have time.
+//sticking the ID in a variable and then inserting the variable into the URL where the ID goes. 
 //technical challenge number 2, the API's are like a spiderweb of data, navigating through it all with clean concise code was tough, 
 //then I started figuring out $ref's a little more so I was able to re-write code to make it a little more cleaner
 //technical challenge number 3, getting the map on the screen, with the satdium names in to correct location, I would like the click to be associated
