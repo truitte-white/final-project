@@ -1,15 +1,3 @@
-//technical challenge number 1, searching by team name returns very limited information(but is the best search to use due to the variations of names that it returns)
-// to return more advanced stats the team id needs to be mapped to the teamname to return the data. I got around this by returning the team ID from the original search,
-//sticking the ID in a variable and then inserting the variable into the URL where the ID goes. 
-//technical challenge number 2, the API's are like a spiderweb of data, navigating through it all with clean concise code was tough, 
-//then I started figuring out $ref's a little more so I was able to re-write code to make it a little more cleaner
-//technical challenge number 3, getting the map on the screen, with the satdium names in to correct location, I would like the click to be associated
-//with the team info, trying to figure that part out. Tried MapBox, and Google Maps and couldn't get a map to show, dug around and found leaflet, really great documentation
-//and I had a map on the screen pretty quickly
-//technical challenge number 4, after getting the team stadium map showing on the bottom of the page, I had to figure out a way to not show that area on the screen before searching
-//I had to set the div as hidden and when the search was clicked set it to display then I wasn't able to search for another team, I kept getting an initialization error becasue of the map
-//I had to read through the leaflet documentation about how to handle and finally found a way to make it work
-
 const button = document.querySelector("#searchButton")
 const teamLogoDisplay = document.querySelector("#teamLogos")
 const teamName = document.querySelector("#teamName")
@@ -37,7 +25,6 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
   maxZoom: 18,
 }).addTo(map)
 
-//get transparent NFL logo
 //this is the array of objects that is used by the maps to put the markers in the proper location, display information on the markers
 //had to edit stadium name in this array to match ESPN data so that it would map correctly, the EXPN data is not up-to-date like the data in the array was so some info is not correct
 let stadiums = [
