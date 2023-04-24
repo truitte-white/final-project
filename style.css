@@ -20,7 +20,7 @@ body{
 .logoNFL {
     width: 200px;
     position: center;
-    padding: 20px;
+    padding: 10px;
     background-size: contain;
     display: block;
     margin-left: auto;
@@ -29,7 +29,7 @@ body{
 
 img{
     background-size: contain;
-    padding: 10px;
+    padding: 5px;
     width: 300px;
 }
 

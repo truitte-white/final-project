@@ -16,13 +16,17 @@ const teamName = document.querySelector("#teamName")
 const teamRecord = document.querySelector("#teamRecord")
 const venueAllImages = document.querySelector("#venueImages")
 const venueInfo = document.querySelector("#venueData")
+const venueInfoTitle = document.querySelector("#venueDataTitle")
 const teamStats = document.querySelector("#teamStats")
 const playerStats = document.querySelector("#playerStats")
 const recordsWinLoss = document.querySelector("#recordsWinLoss")
 const playerStatsTitle = document.querySelector("#playerStatsTitle")
 const teamStatsTitle = document.querySelector("#teamStatsTitle")
 const teamLocationMap = document.querySelector('#teamMap')
+const WeatherData = document.querySelector('#weatherInfo')
+const WeatherDataTitle = document.querySelector('#weatherInfoTitle')
 let map2 = null //needed in order to remove the map when searching without refreshing the page
+const apiKey = '3b93936521db4d49921220323230504'
 
 let map = L.map('map').setView([37.8, -96], 4) //these next few lines creates the map at the top of the page, leaflet has some great documentation
 
@@ -90,14 +94,26 @@ button.addEventListener('click', async (event) => {
     let teamInfo = teamResponse.data.team //use this to grab the venue info below
     let teamLogo = teamInfo.logos[0].href //use this to grab the team logos
     let teamLink = teamInfo.links[0].href //use this to grab the hyperlink to ESPN site for the team, since all of the data is from ESPN, except from the map
+    let teamLocation = teamInfo.location
+
+    //had to prove to myself that I was able to pull information from unrelated API's using info from other API's
+    let response = await axios.get(`http://api.weatherapi.com/v1/current.json?key=${apiKey}&q=${teamLocation}&aqi=yes2`)
+    let cityTemp = response.data.current.temp_f
+    let feelTemp = response.data.current.feelslike_f
+    let condition = response.data.current.condition.text
+    let icon = response.data.current.condition.icon
+    let wind = response.data.current.wind_mph
+    let windDir = response.data.current.wind_dir
+    let visibility = response.data.current.vis_miles
+    let sun = response.data.current.uv
+    let humid = response.data.current.humidity
 
     let teamId = teamInfo.id//grabbing the ID of the team from the API above to use on the API below
     let allTeamInfo = await axios.get(`http://sports.core.api.espn.com/v2/sports/football/leagues/nfl/seasons/2022/teams/${teamId}`)
     let venueCapacity = allTeamInfo.data.venue.capacity
     let venueName = allTeamInfo.data.venue.fullName
     let venueImages = allTeamInfo.data.venue.images
-    console.log(venueName)
-    console.log(allTeamInfo)
+
     //this data is like a bunch of spiderwebs of links so I had to learn about how I could use the $ref to help shorten this data up
     //the data below is for the team stats    
     const responseStatistic = await axios.get(allTeamInfo.data.statistics.$ref)
@@ -184,8 +200,9 @@ button.addEventListener('click', async (event) => {
     //this is for all of the actual text on the page
     teamName.innerHTML = `${teamInfo.displayName}`
 
-    teamLogoDisplay.innerHTML = `<a href=${teamLink} target="_blank"><img src=${teamLogo}>` 
+    venueInfoTitle.innerHTML = `Stadium Information`
     venueInfo.innerHTML = `The ${allTeamInfo.data.name} play football at ${venueName}, which has a capacity of ${venueCapacity} people.`
+    teamLogoDisplay.innerHTML = `<a href=${teamLink} target="_blank"><img src=${teamLogo}>` 
 
     recordsWinLoss.innerHTML = `The ${allTeamInfo.data.name} had an overall win-loss record of ${recordOverall}, with a record of ${recordHome} at home <br>
     and a record of ${recordAway} on the road. They had a division record of ${recordConf}.` 
@@ -208,7 +225,11 @@ button.addEventListener('click', async (event) => {
     Kicking stats: ${fieldGoalsMade} field goals made, ${fieldGoalLong} yards was the longest field goal, and kickers scored ${kickingPoints} points<br>
     Punting stats: ${puntAVG} yards was the net average punt, ${puntLong} yards was the longest punt, and had ${puntBlock} punts blocked<br>
     Return stats: ${kickReturnYards} total kickoff return yards, ${puntReturnYards} total punt return yards, and ${yardsPerReturn} average yards per return<br>
-    Scoring stats: ${twoPointConv} two point conversions, ${totalTDs} total touchdowns, ${totalPoints} total points, and ${avgPointsGame} average points per game<br>`
+    Scoring stats: ${twoPointConv} two point conversions, ${totalTDs} total touchdowns, ${totalPoints} total points, and ${avgPointsGame} average points per game<br> <br>`
+
+    WeatherDataTitle.innerHTML = `Current Weather Conditions for ${teamLocation}`
+    WeatherData.innerHTML = `<img src=${icon}><br>It is currently ${condition}, with a temperature of ${cityTemp}\u00B0F and a RealFeel temp of ${feelTemp}\u00B0F.<br>
+    Humidity is at ${humid}% and the sun has a UV index of ${sun}. Visibility of ${visibility} miles. Wind speed ${wind}MPH from a ${windDir} direction.<br>`
     //this is how I was able to get the image of the venue and display without worrying about how many image were there, it just grabs them all and displays
     for (let i = 0; i < venueImages.length; i++) {
         let venueImage = venueImages[i].href
@@ -241,4 +262,5 @@ button.addEventListener('click', async (event) => {
   catch(error){
     alert("Error: " + error.message + "\n\nPlease enter an NFL team abbreviation from below:\nARI - Arizona Cardinals,  ATL - Atlanta Falcons\nBAL - Baltimore Ravens,  BUF - Buffalo Bills\nCAR - Carolina Panthers, CHI - Chicago Bears\nCIN - Cincinnati Bengals,  CLE - Cleveland Browns\nDAL - Dallas Cowboys, DEN - Denver Broncos\nDET - Detroit Lions, GB - Green Bay Packers\nHOU - Houston Texans, IND - Indianapolis Colts\nJAX - Jacksonville Jaguars, KC - Kansas City Chiefs\nLV - Las Vegas Raiders, LAC - Los Angeles Chargers\nLAR - Los Angeles Rams, MIA - Miami Dolphins\nMIN - Minnesota Vikings, NE - New England Patriots\nNO - New Orleans Saints, NYG - New York Giants\nNYJ - New York Jets, PHI - Philadelphia Eagles\nPIT - Pittsburgh Steelers, SF - San Francisco 49ers\nSEA - Seattle Seahawks, TB - Tampa Bay Buccaneers\nTEN - Tennessee Titans, WAS - Washington Football Team")
   }
+
 })
